@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add cars</title>
+</head>
+<body>
+<a th:href="@{/cars/showCars}">Back to Cars List</a>
+
+<form th:action="@{'/cars/add'}" th:object="${carToAdd}" th:method="POST">
+    <fieldset style="color:blue">
+        <legend style="color:blue"><h2>Add Employee</h2></legend>
+
+        <label for="model">Car model:</label><br/>
+        <input id="model" type="text" name="name" th:field="*{carModel}">
+        <span style="color: red" th:if="${#fields.hasErrors('carModel')}" th:errors="*{carModel}" /><br>
+
+        <label for="colour">Car colour:</label><br/>
+        <input id="colour" type="text" name="color" th:field="*{carColour}">
+        <span style="color: red" th:if="${#fields.hasErrors('carColour')}" th:errors="*{carColour}" /><br>
+
+        <label for="horsePower">Hoese power:</label>
+        <input id="horsePower" type="text" name="horsePower" th:field="*{horsePower}">
+        <span style="color: red" th:if="${#fields.hasErrors('horsePower')}" th:errors="*{horsePower}" /><br>
+
+        <input type="submit" value="Insert New Car" style="color:blue;">
+    </fieldset>
+</form>
+
+</body>
+</html>

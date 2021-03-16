@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
+    <title>Tema10-siit</title>
+
+</head>
+<body>
+
+<header>
+    <h1 style="alignment: center">Car records</h1>
+</header>
+
+<table border="10" , style="color: midnightblue; width: 100%">
+    <tr id="tableHeaderId">
+        <th>Id</th>
+        <th>Car Model</th>
+        <th>Car Colour</th>
+        <th>Horse Power</th>
+    </tr>
+    <tr th:each="car:${carList}">
+        <td th:text="${car.id}"></td>
+        <td th:text="${car.carModel}"></td>
+        <td th:text="${car.carColour}"></td>
+        <td th:text="${car.horsePower}"></td>
+        <td><a th:href="@{/cars/{carId}/edit(carId=${car.id})}">EDIT</a></td>
+        <td>
+            <form th:action="@{/cars/{carId}/delete(carId=${car.id})}"
+                  method="POST">
+                <input type="submit" th:value="DELETE"/>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<form th:action="@{'/cars/add'}" th:object="${carToAdd}" th:method="POST">
+    <fieldset style="color:blue">
+        <legend style="color:blue"><h2>Add Car</h2></legend>
+
+        <label for="model">Car model:</label><br/>
+        <input id="model" type="text" name="name" th:field="*{carModel}"><br>
+
+        <label for="colour">Car colour:</label><br/>
+        <input id="colour" type="text" name="color" th:field="*{carColour}"><br>
+
+        <label for="horsePower">Horsr power:</label>
+        <input id="horsePower" type="text" name="job" th:field="*{horsePower}"><br>
+
+        <input type="submit" value="Insert New Car" style="color:blue;">
+    </fieldset>
+</form>
+
+</body>
+</html>
